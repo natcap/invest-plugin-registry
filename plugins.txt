@@ -1,0 +1,5 @@
+https://github.com/natcap/invest-routedem-tfa-range.git
+https://github.com/natcap/invest-gcm-downscaling.git
+https://github.com/natcap/invest-schistosomiasis.git
+https://github.com/natcap/invest-demo-plugin.git
+https://github.com/natcap/invest-sdr-usle-c-raster.git
