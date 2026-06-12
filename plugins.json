@@ -12,5 +12,12 @@
     "version": "2.0.0",
     "plugin_type": "postprocessing",
     "keywords": ["optimization", "landscape planning", "restoration"]
+  },
+  {
+    "repo_url": "https://github.com/natcap/invest-gcm-downscaling.git",
+    "plugin_name": "GCM Downscaling",
+    "version": "1.0.0",
+    "plugin_type": "new_model",
+    "keywords": ["general circulation model", "climate", "precipitation", "cmip6"]
   }
 ]
