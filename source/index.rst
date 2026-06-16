@@ -118,3 +118,4 @@ If so, you might be interested in our machine-readable package index files:
    Registry GitHub Repo <https://github.com/natcap/invest-plugin-registry/>
    Plugin Developer Docs <https://invest.readthedocs.io/en/latest/plugins.html>
    NatCap Community Forum <https://community.naturalcapitalalliance.org/latest>
+   InVEST Trademark Policy <https://naturalcapitalalliance.stanford.edu/software/invest/invest-trademark-and-logo-use-policy>
