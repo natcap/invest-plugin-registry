@@ -16,7 +16,7 @@
   {
     "repo_url": "https://github.com/natcap/invest-gcm-downscaling.git",
     "plugin_name": "GCM Downscaling",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "plugin_type": "new_model",
     "keywords": ["general circulation model", "climate", "precipitation", "cmip6"]
   }
