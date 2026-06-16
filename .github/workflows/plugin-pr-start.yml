@@ -19,7 +19,7 @@ jobs:
         steps:
             - uses: actions/checkout@v6
 
-            - name: Post the reviewer checklist
+            - name: Post welcome message
               shell: bash
               run: |
-                  gh pr comment "$PR_NUMBER" --body-file="review-rubric.md"
+                  gh pr comment "$PR_NUMBER" --body-file="thanks-for-submitting.md"

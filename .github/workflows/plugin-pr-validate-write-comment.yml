@@ -44,6 +44,7 @@ jobs:
                   REVIEWER_POOL="@natcap/plugin-reviewers"
                   if [[ "$VALIDATION_STATUS" = "passed" ]]
                   then
+                      gh pr comment "$PR_NUM" --body-file="review-rubric.md"
                       gh pr edit \
                         "$PR_NUM" \
                         --repo ${{ github.repository }} \
