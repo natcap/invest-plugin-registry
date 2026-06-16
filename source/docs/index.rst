@@ -10,5 +10,6 @@ Documentation
    submission_process
    linting
    ai_policy
+   trademark_policy
    governance
    review_process
