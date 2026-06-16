@@ -45,6 +45,17 @@ of the Registry GitHub Repo and use the "Report a vulnerability" button to file 
 
 ----
 
+.. _trademark_policy:
+
+InVEST Trademark and Logo Use
+-----------------------------
+
+Please be sure to review the
+`InVEST Trademark and Logo Use Policy <https://naturalcapitalalliance.stanford.edu/software/invest/invest-trademark-and-logo-use-policy>`_
+for details on acceptable uses of the InVEST trademark and logo.
+
+----
+
 Prerequisites
 -------------
 
