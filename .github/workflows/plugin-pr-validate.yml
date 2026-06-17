@@ -8,10 +8,6 @@ on:
     push:
         paths:
             - 'plugins.json'
-            - '.github/workflows/plugin-pr-validate.yml'
-            - 'scripts/lint-metadata.py'
-            - 'scripts/extract-modified-json.py'
-            - 'scripts/validateall.sh'
 
 permissions:
     contents: read
