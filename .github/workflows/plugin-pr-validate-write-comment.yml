@@ -29,6 +29,8 @@ jobs:
                   # Append the PR author to the file.
                   # Using printf for compatibility; part of posix standard
                   # where echo is not.
+                  # NOTE: the literal `@` is needed here since this is in the
+                  # body of the comment.
                   printf "\n\nFYI @${PR_AUTHOR}\n" >> "$VALIDATION_RESULTS"
 
                   # debugging
@@ -41,7 +43,7 @@ jobs:
                         --repo ${{ github.repository }}
 
                   VALIDATION_STATUS=$(cat pr-data/validation-status.txt)
-                  REVIEWER_POOL="@natcap/plugin-reviewers"
+                  REVIEWER_POOL="natcap/plugin-reviewers"
                   if [[ "$VALIDATION_STATUS" = "passed" ]]
                   then
                       gh pr edit \
