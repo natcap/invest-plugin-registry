@@ -24,21 +24,31 @@ handy linter below, built with Pyodide.  Validation messages related to you
 		<table>
 			<tr>
 				<td><label for="githost">Git Host</label></td>
+				<td></td>
 				<td><input type="text" id="githost" name="githost"></td>
 				<td>e.g. github.com, gitlab.com, code.stanford.edu</td>
 			</tr>
 			<tr>
 				<td><label for="githostusername">User/org</label></td>
+				<td></td>
 				<td><input type="text" id="githostusername" name="githostusername"></td>
 				<td>The user or org that owns the repository.</td>
 			</tr>
 			<tr>
 				<td><label for="githostrepo">Repo name</label></td>
+				<td></td>
 				<td><input type="text" id="githostrepo" name="githostrepo"></td>
 				<td>The name of the repository (no spaces)</td>
 			</tr>
 			<tr>
-	   			<td><label for="gitref">Branch name</label></td>
+	   		<td><label for="gitref">Ref to check</label></td>
+				<td>
+					<select name="reftype" id="reftype">
+					  <option  disabled selected>Select ref type</option>
+						<option value="refs/tags">Tag</option>
+						<option value="refs/heads">Branch</option>
+					</select>
+				</td>
 				<td><input type="text" id="gitref" name="gitref" value="main"></td>
 			</tr>
 		</table>
