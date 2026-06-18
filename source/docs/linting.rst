@@ -47,6 +47,7 @@ handy linter below, built with Pyodide.  Validation messages related to you
 					  <option  disabled selected>Select ref type</option>
 						<option value="refs/tags">Tag</option>
 						<option value="refs/heads">Branch</option>
+						<option value="">Commit SHA</option>
 					</select>
 				</td>
 				<td><input type="text" id="gitref" name="gitref" value="main"></td>

@@ -51,7 +51,7 @@ async function executePythonScript() {
 				const githubPattern = /github\.com/;
 				let tomlpath;
 				if (githubPattern.test(gitHost)) {
-					tomlpath = `https://raw.githubusercontent.com/${githostUser}/${githostRepo}/${refType}/${gitRef}/pyproject.toml`;
+					tomlpath = `https://raw.githubusercontent.com/${githostUser}/${githostRepo}/${refType}${gitRef}/pyproject.toml`;
 				} else {
 					// Assume gitlab.  Other git hosts could come later.
 					// Public gitlab-hosted repos don't have CORS headers on the `raw` urls, so we need to use the API instead.
