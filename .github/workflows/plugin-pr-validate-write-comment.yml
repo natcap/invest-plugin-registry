@@ -58,7 +58,7 @@ jobs:
 
                   if
                       [[ "$VALIDATION_STATUS" = "passed" ]] &&
-                      ! gh api "$API_ENDPOINT" | grep -q "$SEARCH_STRING"
+                      ! gh api --paginate --slurp "$API_ENDPOINT" | grep -q "$SEARCH_STRING"
                   then
                       gh pr comment "$PR_NUM" --body-file="review-rubric.md"
                   fi
