@@ -8,8 +8,11 @@ on:
 jobs:
     write-pr-comment-with-validation-results:
         runs-on: ubuntu-latest
+        permissions:
+            pull-requests: write
         env:
             GH_TOKEN: ${{ github.token }}
+            GH_REPO: ${{ github.repository }}
         steps:
             - name: Fetch file
               uses: actions/download-artifact@v8
@@ -29,6 +32,8 @@ jobs:
                   # Append the PR author to the file.
                   # Using printf for compatibility; part of posix standard
                   # where echo is not.
+                  # NOTE: the literal `@` is needed here since this is in the
+                  # body of the comment.
                   printf "\n\nFYI @${PR_AUTHOR}\n" >> "$VALIDATION_RESULTS"
 
                   # debugging
@@ -38,15 +43,25 @@ jobs:
                   gh pr comment \
                         "$PR_NUM" \
                         --body-file "$VALIDATION_RESULTS" \
-                        --repo ${{ github.repository }}
+                        --repo "$GH_REPO"
 
                   VALIDATION_STATUS=$(cat pr-data/validation-status.txt)
-                  REVIEWER_POOL="@natcap/plugin-reviewers"
+                  REVIEWER_POOL="natcap/plugin-reviewers"
                   if [[ "$VALIDATION_STATUS" = "passed" ]]
                   then
                       gh pr edit \
                         "$PR_NUM" \
-                        --repo ${{ github.repository }} \
-                        --add-reviewer "$REVIEWER_POOL" \
-                        --add-assignee "$REVIEWER_POOL"
+                        --repo "$GH_REPO" \
+                        --add-reviewer "$REVIEWER_POOL"
+                  fi
+
+                  # If the review rubric hasn't already been commented, add it
+                  API_ENDPOINT=/repos/"$GH_REPO"/issues/"$PR_NUM"/comments
+                  SEARCH_STRING="## Dear Reviewer,"
+
+                  if
+                      [[ "$VALIDATION_STATUS" = "passed" ]] &&
+                      ! gh api --paginate --slurp "$API_ENDPOINT" | grep -q "$SEARCH_STRING"
+                  then
+                      gh pr comment "$PR_NUM" --body-file="review-rubric.md"
                   fi
