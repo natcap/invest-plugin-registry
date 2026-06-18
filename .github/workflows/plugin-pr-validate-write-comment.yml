@@ -14,6 +14,12 @@ jobs:
             GH_TOKEN: ${{ secrets.PLUGIN_PR_WORKFLOW }}
             GH_REPO: ${{ github.repository }}
         steps:
+            - uses: actions/checkout@v6
+              with:
+                  sparse-checkout: |
+                      review-rubric.md
+                  sparse-checkout-cone-mode: false
+
             - name: Fetch file
               uses: actions/download-artifact@v8
               with:
