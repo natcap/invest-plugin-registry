@@ -181,6 +181,13 @@ same validation script against your ``pyproject.toml`` as will run in an open pu
 Using this tool to double-check your ``pyproject.toml`` before proceeding with the submission
 process can help reduce the need for iteration later.
 
+.. note::
+
+   The linter will run against the latest commit on whichever branch you indicate. The tests
+   that run during the PR process will run against the commit associted with the Tag you
+   will create in the next step. So, it's a good idea to double-check that your
+   ``pyproject.toml`` passes validation before creating a Tag!
+
 ----
 
 .. _create_release:
@@ -200,7 +207,7 @@ are supported; do not prefix your version with ``v``.
 
 .. important::
 
-    The version used for the Tag must match the ``version`` in your ``pyprojec.toml``
+    The version used for the Tag must match the ``version`` in your ``pyproject.toml``
     (unless you are using ``setuptools_scm`` to
     `derive the version dynamically <https://setuptools-scm.readthedocs.io/en/latest/usage/>`_).
 
@@ -291,14 +298,29 @@ required fields.
    For the checkboxes, you can check them by inserting an x between the brackets: ``[x]``.
 3. Click "Create pull request"
 
+Automated testing:
+^^^^^^^^^^^^^^^^^^
+
 Once you submit the pull request, some automated checks will run, including:
 
-* A check confirming that your new entry in ``plugins.json`` is properly formatted. This
+* A test confirming that your new entry in ``plugins.json`` is properly formatted. This
   includes checking that the ``plugin_type`` value you've entered is one of the expected
   values.
-* A basic security scan to help guard against malicious code.
-* A test confirming that your plugin can be installed and loaded by InVEST.
 * A test confirming that all of the required pieces of your ``pyproject.toml`` are included.
+* A test checking that the version included in ``plugins.json`` matches a tag in the plugin
+  repository and also the version listed in your ``pyproject.toml``.
+* A test confirming that your plugin's name is unique.
+* A test confirming that your plugin can be installed and imported.
+* A basic security scan using Bandit to help guard against malicious code.
+
+.. important::
+
+   Tests run against the version of your plugin associated with the Tag you created in
+   :ref:`Step 2 <create_release>` (which should also match the version you listed in
+   ``plugins.json``). If you made any changes to your ``pyproject.toml`` or other files
+   in your plugin repository after creating the release, you will need to update the Tag
+   to point to a commit including the changes. (The easiest way to do this may be to
+   delete the Tag and create it again, pointing to a different commit.)
 
 If tests fail:
 ^^^^^^^^^^^^^^
@@ -307,6 +329,12 @@ If any of these tests fail, the bot will add a comment to the PR tagging you and
 a message explaining what went wrong. At this stage, if you have questions about how to fix
 the problem(s), you can request help from someone on the maintainer team; please leave a
 comment on the PR tagging ``@natcap/software-team`` and they will do their best to assist.
+
+If the failures are related to the content of your ``pyproject.toml`` or other files in
+the plugin repository, after making edits you will need to update the commit associated with
+the Tag you created in :ref:`Step 2 <create_release>`. The easiest way to do this is generally
+to delete the Release and its associated Tag and create a new one (using the same version
+identifier).
 
 Once you have addressed the failures, you can re-trigger the tests by leaving a comment on
 the PR that says ``/run-validation``, as shown in the screenshot below.

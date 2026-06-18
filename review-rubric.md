@@ -1,6 +1,8 @@
-## Thank you for your plugin request!
+## Next Step: Plugin Review
 
-A reviewer will take a look using the checklist below, and you can find more information about the [review process here](https://natcap.github.io/invest-plugin-registry/docs/submission_process.html#step-4-submit-a-pull-request-for-review), and more about the [registry's governance here](https://natcap.github.io/invest-plugin-registry/docs/governance.html).
+In the next few days, a reviewer will evaluate your plugin submission using the checklist below. You can find more information about the [review process here](https://natcap.github.io/invest-plugin-registry/docs/submission_process.html#step-4-submit-a-pull-request-for-review), and more about the [registry's governance here](https://natcap.github.io/invest-plugin-registry/docs/governance.html).
+
+If your reviewer has any questions or requests changes, they will leave their feedback in a review and tag you. Stay tuned!
 
 ## Dear Reviewer,
 
