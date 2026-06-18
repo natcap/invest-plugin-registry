@@ -51,6 +51,5 @@ jobs:
                       gh pr edit \
                         "$PR_NUM" \
                         --repo ${{ github.repository }} \
-                        --add-reviewer "$REVIEWER_POOL" \
-                        --add-assignee "$REVIEWER_POOL"
+                        --add-reviewer "$REVIEWER_POOL"
                   fi
