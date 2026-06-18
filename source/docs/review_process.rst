@@ -66,3 +66,21 @@ the plugin repository, please also double-check the files changed by the PR. Onl
 
   - Select the "Request changes" radio button
   - Click the green "Submit review" button
+
+Rubric for easy copy-paste:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hover over the code block below and a "Copy to clipboard" button will appear in the upper
+right-hand corner. This code block is properly formatted for pasting into GitHub.
+
+.. code:: markdown
+
+  - [ ] The only modification to `plugins.json` was to add a new entry for this plugin; no other changes were made
+  - [ ] The submitter included all required information in the PR description, including:
+    - [ ] The plugin repo URL;
+    - [ ] A brief description of the plugin's motivation and context;
+    - [ ] Acknowledgment of the Code of Conduct
+  - [ ] The plugin is germane to NatCap's work, broadly (it has to do with nature and/or nature's benefits to people)
+  - [ ] The plugin has documentation and documents data needs
+  - [ ] The plugin's documentation appears relevant to the plugin's description
+  - [ ] The plugin's name is unique and appropriate (it adheres to the Code of Conduct)
