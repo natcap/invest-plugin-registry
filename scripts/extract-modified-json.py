@@ -121,7 +121,13 @@ class TestExtractModifiedJSON(unittest.TestCase):
 
     def test_no_changes(self):
         """Verify behavior when no changes found."""
-        pass
+        # When no changes, then new file is a copy of the reference json.
+        new_file = os.path.join(self.tempdir, 'new_file.json')
+        shutil.copy(self.reference_file, new_file)
+
+        target_file = os.path.join(self.tempdir, 'target.json')
+        with self.assertRaises(SystemExit):
+            main([new_file, self.reference_file, target_file])
 
     def test_invalid_pr_json(self):
         """Verify error when pr json could not be parsed."""
