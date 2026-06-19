@@ -84,15 +84,40 @@ def main(args=None):
 class TestExtractModifiedJSON(unittest.TestCase):
     """Test suite for the extract-modified-json CLI functionality."""
 
-    def setup(self):
+    def setUp(self):
         self.tempdir = tempfile.mkdtemp()
+
+        self.reference_file = os.path.join(self.tempdir, 'ref.json')
+        with open(self.reference_file, 'w') as ref_json:
+            # Most basic reference json file has no data in it, just an empty
+            # list.
+            json.dump([], ref_json)
 
     def tearDown(self):
         shutil.rmtree(self.tempdir)
 
     def test_extracted_changes(self):
         """Verify behavior when changes work as expected."""
-        pass
+        new_plugin_json_data = [
+            {
+                "repo_url": "https://github.com/natcap/invest-routedem-tfa-range.git",
+                "plugin_name": "RouteDEM with TFA Range",
+                "version": "1.0.0",
+                "plugin_type": "invest_model_variant",
+                "keywords": ["RouteDEM", "hydrology", "streams", "routing"]
+            }
+        ]
+        new_plugin_data_file_path = os.path.join(self.tempdir, 'new.json')
+        with open(new_plugin_data_file_path, 'w') as new_plugin_file:
+            json.dump(new_plugin_json_data, new_plugin_file)
+
+        target_json_file_path = os.path.join(self.tempdir, 'target.json')
+
+        main([new_plugin_data_file_path, self.reference_file,
+              target_json_file_path])
+
+        with open(target_json_file_path, 'r') as target_json_file:
+            self.assertEqual(new_plugin_json_data[0], json.load(target_json_file))
 
     def test_no_changes(self):
         """Verify behavior when no changes found."""
