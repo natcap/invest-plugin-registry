@@ -172,6 +172,22 @@ class TestExtractModifiedJSON(unittest.TestCase):
         with self.assertRaises(SystemExit):
             main([new_filepath, self.reference_file, target_file])
 
+    def test_both_files_changed(self):
+        """Verify error when both files were changed."""
+        reference_data = [{"foo": "bar"}]
+        with open(self.reference_file, 'w') as ref_file:
+            json.dump(reference_data, ref_file)
+
+        new_data = [{"1": "2"}]
+        new_filepath = os.path.join(self.tempdir, 'new.json')
+        with open(new_filepath, 'w') as new_file:
+            json.dump(new_data, new_file)
+
+        target_file = os.path.join(self.tempdir, 'target.json')
+
+        with self.assertRaises(SystemExit):
+            main([new_filepath, self.reference_file, target_file])
+
 
 if __name__ == '__main__':
     main()
