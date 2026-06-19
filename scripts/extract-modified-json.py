@@ -12,6 +12,7 @@ import logging
 import os
 import shutil
 import tempfile
+import textwrap
 import unittest
 
 logging.basicConfig(level=logging.DEBUG)
@@ -32,17 +33,25 @@ def main(args=None):
 
     parsed_args = parser.parse_args(args)
 
-    with open(parsed_args.reference_plugins_json) as reference_json_file:
-        reference_json = json.load(reference_json_file)
-        LOGGER.debug(f"Reference json: {reference_json}")
+    try:
+        with open(parsed_args.reference_plugins_json) as reference_json_file:
+            reference_json = json.load(reference_json_file)
+            LOGGER.debug(f"Reference json: {reference_json}")
+    except json.JSONDecodeError as error:
+        LOGGER.exception(f"Could not parse JSON file: {error}")
+        parser.exit(1, "Could not parse the reference JSON file")
 
-    with open(parsed_args.pr_plugins_json) as pr_json_file:
-        pr_json = json.load(pr_json_file)
-        LOGGER.debug(f"PR json: {pr_json}")
+    try:
+        with open(parsed_args.pr_plugins_json) as pr_json_file:
+            pr_json = json.load(pr_json_file)
+            LOGGER.debug(f"PR json: {pr_json}")
+    except json.JSONDecodeError as error:
+        LOGGER.exception(f"Could not parse JSON file: {error}")
+        parser.exit(1, "Could not parse the PR JSON file")
 
     # Fail if no change to the pr json file.
     if pr_json == reference_json:
-        parser.exit(1, "No changes found in the plugins json file.")
+        parser.exit(2, "No changes found in the plugins json file.")
 
     # Fail if there isn't 1 more item in the pr json file than the reference.
     _serialize = functools.partial(json.dumps, sort_keys=True)
@@ -53,7 +62,7 @@ def main(args=None):
     if not (len(pr_json_set - reference_json_set) == 1 and
             len(reference_json_set - pr_json_set) == 0):
         parser.exit(
-            2, ("Expected exactly 1 new object and that the reference JSON "
+            3, ("Expected exactly 1 new object and that the reference JSON "
                 "is unchanged"))
 
     # Compare individual entries to ensure all entries are unchanged
@@ -69,7 +78,7 @@ def main(args=None):
 
     if len(nonmatching_data) != 1:
         parser.exit(
-            3, (
+            4, (
             "Some data in the json file has been modified relative to "
             f"{parsed_args._reference_git_ref}"))
 
@@ -131,13 +140,37 @@ class TestExtractModifiedJSON(unittest.TestCase):
 
     def test_invalid_pr_json(self):
         """Verify error when pr json could not be parsed."""
-        pass
+        # Need to write out a json object that isn't valid json.
+        new_filepath = os.path.join(self.tempdir, 'newfile.json')
+        with open(new_filepath, 'w') as new_file:
+            new_file.write(textwrap.dedent(
+                """\
+                [
+                {
+                    "foo": "bar",
+                },
+                ]
+                """))
+
+        target_file = os.path.join(self.tempdir, 'target.json')
+        with self.assertRaises(SystemExit):
+            main([new_filepath, self.reference_file, target_file])
 
     def test_invalid_reference_json(self):
         """Verify error when reference json could not be parsed."""
-        pass
+        with open(self.reference_file, 'w') as ref_file:
+            ref_file.write(textwrap.dedent(
+                """\
+                [],
+                """))
 
+        new_filepath = os.path.join(self.tempdir, 'newfile.json')
+        with open(new_filepath, 'w') as new_file:
+            json.dump({}, new_file)
 
+        target_file = os.path.join(self.tempdir, 'target.json')
+        with self.assertRaises(SystemExit):
+            main([new_filepath, self.reference_file, target_file])
 
 
 if __name__ == '__main__':
