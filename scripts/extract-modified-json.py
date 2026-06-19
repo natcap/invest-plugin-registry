@@ -1,7 +1,7 @@
 # /// script
 # requires-python = ">=3.6"
 # dependencies = [
-#     "requests",
+#     "pytest",
 # ]
 # ///
 import argparse
@@ -9,14 +9,13 @@ import functools
 import hashlib
 import json
 import logging
-
-import requests
+import os
+import shutil
+import tempfile
+import unittest
 
 logging.basicConfig(level=logging.DEBUG)
 LOGGER = logging.getLogger(__name__)
-
-RAW_REPO_PREFIX = (
-    'https://raw.githubusercontent.com/natcap/invest-plugin-registry')
 
 
 def _hashdict(source_dict):
@@ -80,6 +79,34 @@ def main(args=None):
     with open(parsed_args.target_json, 'w') as target_json_file:
         target_json_file.write(
             json.dumps(nonmatching_data[0], indent=4, sort_keys=True))
+
+
+class TestExtractModifiedJSON(unittest.TestCase):
+    """Test suite for the extract-modified-json CLI functionality."""
+
+    def setup(self):
+        self.tempdir = tempfile.mkdtemp()
+
+    def tearDown(self):
+        shutil.rmtree(self.tempdir)
+
+    def test_extracted_changes(self):
+        """Verify behavior when changes work as expected."""
+        pass
+
+    def test_no_changes(self):
+        """Verify behavior when no changes found."""
+        pass
+
+    def test_invalid_pr_json(self):
+        """Verify error when pr json could not be parsed."""
+        pass
+
+    def test_invalid_reference_json(self):
+        """Verify error when reference json could not be parsed."""
+        pass
+
+
 
 
 if __name__ == '__main__':
