@@ -52,7 +52,6 @@ regular ``bandit`` checks into their development workflows.
 
 ----
 
-
 Prerequisites
 -------------
 
@@ -312,7 +311,7 @@ Once you submit the pull request, some automated checks will run, including:
   repository and also the version listed in your ``pyproject.toml``.
 * A test confirming that your plugin's name is unique.
 * A test confirming that your plugin can be installed and imported.
-* A basic security scan using Bandit to help guard against malicious code.
+* A basic security scan using `bandit` to help guard against malicious code.
 
 .. important::
 
@@ -343,6 +342,7 @@ the PR that says ``/run-validation``, as shown in the screenshot below.
 .. image:: /_static/run-validation.png
    :alt: A screenshot of a GitHub PR comment that says "/run-validation"
    :height: 150px
+   :align: center
 
 This will trigger an action that closes and re-opens the PR, causing tests to run again.
 You can also manually close and then re-open the PR.

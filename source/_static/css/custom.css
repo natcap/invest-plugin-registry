@@ -35,3 +35,9 @@
   -webkit-mask-image: var(--icon--screwdriver-wrench);
   mask-image: var(--icon--screwdriver-wrench);
 }
+
+.bordered-img {
+  border: 1px solid #e3e3e3;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
