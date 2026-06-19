@@ -183,10 +183,10 @@ process can help reduce the need for iteration later.
 
 .. note::
 
-   The linter will run against the latest commit on whichever branch you indicate. The tests
-   that run during the PR process will run against the commit associted with the Tag you
-   will create in the next step. So, it's a good idea to double-check that your
-   ``pyproject.toml`` passes validation before creating a Tag!
+   The tests that run during the PR process will run against the commit associted with the
+   Tag you will create in the next step. So, it's a good idea to double-check that your
+   ``pyproject.toml`` passes validation before creating a Tag! You can run the in-browser
+   linter against a specific Commit SHA, Branch, or Tag.
 
 ----
 
