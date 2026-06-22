@@ -19,6 +19,4 @@ html:
 	cp -r source/_build/html/* html
 
 test:
-	@for FILE in ./scripts/*.py; do \
-		uvx --with-requirements "$$FILE" pytest "$$FILE"; \
-	done
+	bash scripts/test-scripts.sh
