@@ -1,3 +1,8 @@
+# /// script
+# requires-python = ">=3.6"
+# dependencies = [
+# ]
+# ///
 import argparse
 import json
 import logging
@@ -6,7 +11,6 @@ import re
 import textwrap
 
 from utils import PLUGIN_TYPES
-
 
 logging.basicConfig(level=logging.INFO)
 LOGGER = logging.getLogger(__name__)

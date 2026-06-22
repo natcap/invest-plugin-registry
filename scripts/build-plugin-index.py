@@ -1,12 +1,18 @@
+# /// script
+# requires-python = ">=3.6"
+# dependencies = [
+#     "jinja2",
+# ]
+# ///
 import json
 import logging
 import re
 from os import path
 
-from jinja2 import Environment, FileSystemLoader, select_autoescape
-
+from jinja2 import Environment
+from jinja2 import FileSystemLoader
+from jinja2 import select_autoescape
 from utils import PLUGIN_TYPES
-
 
 logging.basicConfig(level=logging.INFO)
 LOGGER = logging.getLogger(__name__)

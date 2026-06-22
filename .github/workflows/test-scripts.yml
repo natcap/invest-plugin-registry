@@ -1,0 +1,27 @@
+name: "Test scripts"
+
+on:
+    push:
+        paths:
+            - "scripts/*.py"
+
+permissions:
+    contents: read
+
+jobs:
+    run-tests:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
+
+            - uses: actions/setup-python@v6
+              with:
+                  python-version: "3.14"
+                  cache: "pip"
+                  python-version-file: ".python-version"
+
+            - name: Install uv
+              uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+
+            - name: Run tests
+              run: make test
