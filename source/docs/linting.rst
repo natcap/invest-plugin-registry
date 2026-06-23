@@ -3,7 +3,7 @@ In-Browser Linting
 ==================
 
 To lint your project's ``pyproject.toml`` before submitting a PR, just run the
-handy linter below, built with Pyodide.  Validation messages related to you
+handy linter below, built with Pyodide.  Validation messages related to your
 ``pyproject.toml`` file will appear just below the inputs.
 
 .. note::

@@ -76,12 +76,19 @@ folder of your repository:
 * A ``LICENSE.txt`` that determines how others are allowed to use the plugin and its
   source code. More information about `adding a license <https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository>`_
   to your plugin repo or `choosing a license <https://choosealicense.com/>`_ can be
-  found at the respective links. **Note:** All plugins must have a permissive open
-  source license compatible with Apache-2.0 in order to be included in the plugin
-  registry.
-* A ``README.md`` / ``README.rst`` that describes your plugin.
+  found at the respective links.
+
+  .. admonition:: A note about licenses
+
+    InVEST is licensed under Apache-2.0, which is a permissive open-source license. In
+    the spirit of open software, community, and collaboration, it is strongly encouraged
+    to choose a similarly permissive license for your plugin.
+
+* A ``README.md`` / ``README.rst`` that explains your plugin to a potential user.
 
 .. _pyproj_reqs:
+
+.. rst-class:: sd-mt-5
 
 Required ``pyproject.toml`` metadata:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -145,6 +152,8 @@ The following keys are required for inclusion in the community plugin registry:
 
 .. _readme_reqs:
 
+.. rst-class:: sd-mt-5
+
 Recommended to include in your ``README``:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -183,7 +192,7 @@ process can help reduce the need for iteration later.
 
 .. note::
 
-   The tests that run during the PR process will run against the commit associted with the
+   The tests that run during the PR process will run against the commit associated with the
    Tag you will create in the next step. So, it's a good idea to double-check that your
    ``pyproject.toml`` passes validation before creating a Tag! You can run the in-browser
    linter against a specific Commit SHA, Branch, or Tag.
@@ -298,6 +307,8 @@ required fields.
    For the checkboxes, you can check them by inserting an x between the brackets: ``[x]``.
 3. Click "Create pull request"
 
+.. rst-class:: sd-mt-5
+
 Automated testing:
 ^^^^^^^^^^^^^^^^^^
 
@@ -321,6 +332,8 @@ Once you submit the pull request, some automated checks will run, including:
    in your plugin repository after creating the release, you will need to update the Tag
    to point to a commit including the changes. (The easiest way to do this may be to
    delete the Tag and create it again, pointing to a different commit.)
+
+.. rst-class:: sd-mt-5
 
 If tests fail:
 ^^^^^^^^^^^^^^
@@ -346,6 +359,8 @@ the PR that says ``/run-validation``, as shown in the screenshot below.
 
 This will trigger an action that closes and re-opens the PR, causing tests to run again.
 You can also manually close and then re-open the PR.
+
+.. rst-class:: sd-mt-5
 
 Once tests pass:
 ^^^^^^^^^^^^^^^^
