@@ -167,6 +167,10 @@ should link to it from your ``README``.
 The ``README`` is also a good place to include any peer-reviewed paper(s) associated
 with your plugin, as well as any funding source(s) that contributed to its creation.
 
+If your plugin requires the use of data from a particular source, make sure to document
+that requirement. Additionally, if any required data have licensing restrictions, please
+document those restrictions as well.
+
 ----
 
 .. _host_plugin:
@@ -249,7 +253,9 @@ On your fork, add a new entry at the bottom of the ``plugins.json`` file:
 * ``plugin_name`` should be the display name you want to use for your plugin on the
   Registry. This value must be unique in the Community Plugins list.
 
-  * **NOTE**: It's strongly recommended to use the same name for ``plugin_name`` that
+  .. important::
+
+    It's strongly recommended to use the same name for ``plugin_name`` that
     you used for the ``model_title`` attribute in your ``MODEL_SPEC``, since the
     ``model_title`` is what will be displayed in the Workbench.
 
@@ -280,7 +286,10 @@ On your fork, add a new entry at the bottom of the ``plugins.json`` file:
   * If your plugin is a model variant, please include the name of the InVEST model of
     which it is a variant. For instance, if your plugin is a variant of the Sediment
     Delivery Ratio model, include "Sediment Delivery Ratio" in the ``keywords`` list.
-  * **Note:** The maintainer team may periodically make changes to the ``keywords`` lists
+
+.. note::
+
+    The maintainer team may periodically make changes to the ``keywords`` lists
     associated with plugins tracked in the repository, to normalize and unify the
     terminology used in an effort to better enable search functionality.
 
