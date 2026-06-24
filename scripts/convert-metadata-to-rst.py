@@ -140,11 +140,13 @@ def render_rst_file(plugin_name, plugin_metadata, out_dir):
 
         .. tags:: {all_tags}
 
+        |
         | **Source Code:** {plugin_metadata['github_repo']}
         | **Current Version:** {plugin_metadata['version']}
         | **Last Updated:** {plugin_metadata['date_last_updated']}
         | **License**: {plugin_metadata['pyproject_toml']['project']['license']}
         | {authors_maintainers}
+        |
         | `Documentation <{docs_link}>`_ :octicon:`link-external` | `Issue Tracker <{issues_link}>`_ :octicon:`link-external`
 
         .. admonition:: Install this plugin in the InVEST Workbench

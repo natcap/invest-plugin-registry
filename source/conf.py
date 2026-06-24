@@ -65,7 +65,6 @@ html_theme_options = {
         'sd-color-card-border-hover': '#007c92',
         'sd-color-secondary': '#2D716F',
         'sd-color-secondary-highlight': '#014240',
-        'admonition-font-size': '1rem',
     },
     'dark_css_variables': {
         'color-brand-primary': '#B6B1A9',
@@ -75,7 +74,6 @@ html_theme_options = {
         'sd-color-card-border-hover': '#620059',
         'sd-color-secondary': '#734675',
         'sd-color-secondary-highlight': '#620059',
-        'admonition-font-size': '1rem',
     },
     'sidebar_hide_name': True,  # don't show name in sidebar, only logo
     'announcement': '',
