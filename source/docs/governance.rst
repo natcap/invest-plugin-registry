@@ -5,7 +5,7 @@ Registry Governance
 ===================
 
 This section describes the governance and leadership model of the Natural Capital
-Alliance (NatCap) Community Plugin Registry. 
+Alliance (NatCap) Community Plugin Registry.
 
 Plugin review is conducted by a Reviewer Pool, which is comprised of volunteers from
 Natural Capital Alliance member organizations. Reviewer Pool members have the authority
@@ -22,7 +22,7 @@ policies outlined in these documents.
 
 The Natural Capital Alliance Platform Steering Committee (PSC), the governing body for
 NatCap science and software, has the authority to resolve any conflicts related to Plugin
-Registry governance that may arise. 
+Registry governance that may arise.
 
 Current Reviewer Pool Members:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

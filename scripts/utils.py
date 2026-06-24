@@ -1,6 +1,10 @@
+# /// script
+# requires-python = ">=3.6"
+# dependencies = [
+# ]
+# ///
 import re
 from urllib.parse import urlparse
-
 
 PLUGIN_TYPES = {
     "preprocessing": "Preprocessing",

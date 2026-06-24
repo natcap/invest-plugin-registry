@@ -37,7 +37,7 @@ NEW_PLUGIN_DATA_FILE=new_plugin.json
 uv run --script scripts/extract-modified-json.py \
   plugins.json \
   main_plugins.json \
-  "$NEW_PLUGIN_DATA_FILE"
+  "$NEW_PLUGIN_DATA_FILE" || (echo "❌ Could not parse JSON data" > errors.txt  && write_comment errors.txt && exit 1)
 cat "$NEW_PLUGIN_DATA_FILE"
 VERSION="$(jq --raw-output .version $NEW_PLUGIN_DATA_FILE)"
 echo "We will try to check out version $VERSION"

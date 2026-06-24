@@ -76,12 +76,19 @@ folder of your repository:
 * A ``LICENSE.txt`` that determines how others are allowed to use the plugin and its
   source code. More information about `adding a license <https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository>`_
   to your plugin repo or `choosing a license <https://choosealicense.com/>`_ can be
-  found at the respective links. **Note:** All plugins must have a permissive open
-  source license compatible with Apache-2.0 in order to be included in the plugin
-  registry.
-* A ``README.md`` / ``README.rst`` that describes your plugin.
+  found at the respective links.
+
+  .. admonition:: A note about licenses
+
+    InVEST is licensed under Apache-2.0, which is a permissive open-source license. In
+    the spirit of open software, community, and collaboration, it is strongly encouraged
+    to choose a similarly permissive license for your plugin.
+
+* A ``README.md`` / ``README.rst`` that explains your plugin to a potential user.
 
 .. _pyproj_reqs:
+
+.. rst-class:: sd-mt-5
 
 Required ``pyproject.toml`` metadata:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -145,6 +152,8 @@ The following keys are required for inclusion in the community plugin registry:
 
 .. _readme_reqs:
 
+.. rst-class:: sd-mt-5
+
 Recommended to include in your ``README``:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -157,6 +166,10 @@ should link to it from your ``README``.
 
 The ``README`` is also a good place to include any peer-reviewed paper(s) associated
 with your plugin, as well as any funding source(s) that contributed to its creation.
+
+If your plugin requires the use of data from a particular source, make sure to document
+that requirement. Additionally, if any required data have licensing restrictions, please
+document those restrictions as well.
 
 ----
 
@@ -183,10 +196,10 @@ process can help reduce the need for iteration later.
 
 .. note::
 
-   The linter will run against the latest commit on whichever branch you indicate. The tests
-   that run during the PR process will run against the commit associted with the Tag you
-   will create in the next step. So, it's a good idea to double-check that your
-   ``pyproject.toml`` passes validation before creating a Tag!
+   The tests that run during the PR process will run against the commit associated with the
+   Tag you will create in the next step. So, it's a good idea to double-check that your
+   ``pyproject.toml`` passes validation before creating a Tag! You can run the in-browser
+   linter against a specific Commit SHA, Branch, or Tag.
 
 ----
 
@@ -240,7 +253,9 @@ On your fork, add a new entry at the bottom of the ``plugins.json`` file:
 * ``plugin_name`` should be the display name you want to use for your plugin on the
   Registry. This value must be unique in the Community Plugins list.
 
-  * **NOTE**: It's strongly recommended to use the same name for ``plugin_name`` that
+  .. important::
+
+    It's strongly recommended to use the same name for ``plugin_name`` that
     you used for the ``model_title`` attribute in your ``MODEL_SPEC``, since the
     ``model_title`` is what will be displayed in the Workbench.
 
@@ -271,7 +286,10 @@ On your fork, add a new entry at the bottom of the ``plugins.json`` file:
   * If your plugin is a model variant, please include the name of the InVEST model of
     which it is a variant. For instance, if your plugin is a variant of the Sediment
     Delivery Ratio model, include "Sediment Delivery Ratio" in the ``keywords`` list.
-  * **Note:** The maintainer team may periodically make changes to the ``keywords`` lists
+
+.. note::
+
+    The maintainer team may periodically make changes to the ``keywords`` lists
     associated with plugins tracked in the repository, to normalize and unify the
     terminology used in an effort to better enable search functionality.
 
@@ -298,6 +316,8 @@ required fields.
    For the checkboxes, you can check them by inserting an x between the brackets: ``[x]``.
 3. Click "Create pull request"
 
+.. rst-class:: sd-mt-5
+
 Automated testing:
 ^^^^^^^^^^^^^^^^^^
 
@@ -311,7 +331,7 @@ Once you submit the pull request, some automated checks will run, including:
   repository and also the version listed in your ``pyproject.toml``.
 * A test confirming that your plugin's name is unique.
 * A test confirming that your plugin can be installed and imported.
-* A basic security scan using Bandit to help guard against malicious code.
+* A basic security scan using `bandit` to help guard against malicious code.
 
 .. important::
 
@@ -321,6 +341,8 @@ Once you submit the pull request, some automated checks will run, including:
    in your plugin repository after creating the release, you will need to update the Tag
    to point to a commit including the changes. (The easiest way to do this may be to
    delete the Tag and create it again, pointing to a different commit.)
+
+.. rst-class:: sd-mt-5
 
 If tests fail:
 ^^^^^^^^^^^^^^
@@ -342,9 +364,12 @@ the PR that says ``/run-validation``, as shown in the screenshot below.
 .. image:: /_static/run-validation.png
    :alt: A screenshot of a GitHub PR comment that says "/run-validation"
    :height: 150px
+   :align: center
 
 This will trigger an action that closes and re-opens the PR, causing tests to run again.
 You can also manually close and then re-open the PR.
+
+.. rst-class:: sd-mt-5
 
 Once tests pass:
 ^^^^^^^^^^^^^^^^
