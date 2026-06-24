@@ -25,6 +25,6 @@
     "plugin_name": "InVEST Calibration Assistant",
     "version": "1.0.0",
     "plugin_type": "workflow",
-    "keywords": ["calibration", "AWY", "SWY", "NDR"]
+    "keywords": ["calibration", "AWY", "SWY", "NDR", "SDR"]
   }
 ]
