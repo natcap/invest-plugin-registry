@@ -18,6 +18,7 @@ extensions = [
     "sphinx_tags",
     "sphinx_copybutton",
     "myst_parser",
+    "sphinxcontrib.googleanalytics",
 ]
 
 source_suffix = {
@@ -81,3 +82,7 @@ html_theme_options = {
 html_css_files = [
     'css/custom.css'
 ]
+
+# -- Google Analytics Config-------------------------------------------------
+googleanalytics_id = 'G-V4LRNKYK0B'
+googleanalytics_enabled = True

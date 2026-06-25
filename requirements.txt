@@ -3,6 +3,7 @@ sphinx
 sphinx-copybutton
 sphinx-design
 sphinx-tags
+sphinxcontrib-googleanalytics
 furo
 validate-pyproject
 myst-parser
