@@ -26,5 +26,12 @@
     "version": "1.0.0",
     "plugin_type": "workflow",
     "keywords": ["calibration", "AWY", "SWY", "NDR", "SDR"]
+  },
+  {
+    "repo_url": "https://github.com/natcap/invest-sdr-usle-c-raster.git",
+    "plugin_name": "SDR with USLE C Raster Input",
+    "version": "1.0.0",
+    "plugin_type": "invest_model_variant",
+    "keywords": ["SDR", "sediment", "erosion"]
   }
 ]
