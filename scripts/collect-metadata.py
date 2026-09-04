@@ -19,7 +19,7 @@ import tomllib
 
 import requests
 
-from utils import construct_base_url
+import utils
 
 logging.basicConfig(level=logging.INFO)
 LOGGER = logging.getLogger(__name__)
@@ -30,6 +30,9 @@ DEFAULT_OUTDIR = os.path.join(REPO_ROOT, 'html')
 DESCRIPTION_OUTDIR = os.path.join(REPO_ROOT, 'source', 'plugins', 'partials')
 CACHEDIR = os.path.join(os.path.dirname(__file__), '.cache')
 MAXCACHEAGE = 360  # seconds
+
+REGISTRY_BASE_URL = 'https://natcap.github.io/invest-plugin-registry'
+SCHEMA_VERSION = 0  # in case we need a new version in the future
 
 def _hashfile(filepath):
     sha = hashlib.sha256()
@@ -128,6 +131,7 @@ def main(args=None):
         os.makedirs(DESCRIPTION_OUTDIR)
 
     all_toml_data = {}  # name: loaded_toml
+    workbench_metadata = []
     with open(parsed_args.pluginslist, 'r') as plugins_list:
         plugins_json = json.load(plugins_list)
 
@@ -138,7 +142,7 @@ def main(args=None):
 
         _, _, host, org, repo = re.sub(r'\.git$', '', plugin_git_url).split('/')
 
-        base_url = construct_base_url(plugin_git_url, plugin_version)
+        base_url = utils.construct_base_url(plugin_git_url, plugin_version)
 
         pyproject_url = base_url.replace('FILENAME', 'pyproject.toml')
         LOGGER.debug(f"Getting toml {pyproject_url}")
@@ -178,10 +182,45 @@ def main(args=None):
             'plugin_name': plugin['plugin_name']
         }
 
+        workbench_metadata.append({
+            'pyproject_toml_project_name': pyproject_toml['project']['name'],
+            'invest_package_name': pyproject_toml['tool']['natcap']['invest']['package_name'],
+            'plugin_name': plugin['plugin_name'],
+            'version': plugin_version,
+            'description': pyproject_toml['project']['description'],
+            'authors': utils.format_contact(
+                pyproject_toml['project'].get('authors', [])),
+            'maintainers': utils.format_contact(
+                pyproject_toml['project'].get('maintainers', [])),
+            'registry_url': f'{REGISTRY_BASE_URL}/plugins/{project_name}.html',
+            'repository_url': plugin_git_url,
+            'documentation_url': utils.get_docs_link(plugin_git_url, pyproject_toml),
+            'issues_url': utils.get_issues_link(plugin_git_url, pyproject_toml),
+            'license': pyproject_toml['project']['license'],
+            'plugin_type': plugin['plugin_type'],
+            'keywords': plugin['keywords'],
+            'date_last_updated': tag_date
+        })
+
+    generated_date = datetime.datetime.today().isoformat()
+
+    # For use by the InVEST Workbench integration:
+    workbench_metadata_object = {
+        'data': workbench_metadata,
+        'generated': generated_date,
+        'schema_version': SCHEMA_VERSION
+    }
+
+    workbench_metadata_json_path = os.path.join(outdir, 'workbench_metadata.json')
+    LOGGER.info(f"Writing {workbench_metadata_json_path}")
+    with open(workbench_metadata_json_path, 'w') as metadata_json_file:
+        json.dump(workbench_metadata_object, metadata_json_file)
+
+    # For use by the Registry itself:
     metadata_object = {
         'data': all_toml_data,
-        'generated': datetime.datetime.today().isoformat(),
-        'schema_version': 0,  # in case we need a new version of this
+        'generated': generated_date,
+        'schema_version': SCHEMA_VERSION
     }
 
     metadata_json_path = os.path.join(outdir, 'metadata.json')
