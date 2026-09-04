@@ -10,25 +10,10 @@ import os
 import re
 import textwrap
 
-from utils import PLUGIN_TYPES
+import utils
 
 logging.basicConfig(level=logging.INFO)
 LOGGER = logging.getLogger(__name__)
-
-
-def format_contact(contacts):
-    contacts_list = []
-    for contact in contacts:
-        name = contact.get('name')
-        email = contact.get('email')
-        if not name and not email:
-            pass
-        if name and email:
-            contacts_list.append(f"{name} ({email})")
-        else:
-            contacts_list.append(f"{name or email}")
-    contacts_str = "; ".join(contacts_list)
-    return contacts_str
 
 
 def render_rst_file(plugin_name, plugin_metadata, out_dir):
@@ -80,18 +65,14 @@ def render_rst_file(plugin_name, plugin_metadata, out_dir):
     else:
         pypi_dependencies = "No PyPI dependencies defined"
 
-    repo_url = re.sub(r'\.git$', '', plugin_metadata['github_repo']).rstrip('/')
-    issues_link = plugin_metadata['pyproject_toml']['project']['urls'].get(
-            'Issues', f"{repo_url}/issues")
-    docs_link = plugin_metadata['pyproject_toml']['project']['urls'].get(
-            'Documentation', repo_url)
-    if not docs_link.startswith('http'):
-        # Assume it's a filepath relative to the root of the repo
-        docs_link = f"{repo_url}/{docs_link.lstrip('/')}"
+    issues_link = utils.get_issues_link(
+        plugin_metadata['github_repo'], plugin_metadata['pyproject_toml'])
+    docs_link = utils.get_docs_link(
+        plugin_metadata['github_repo'], plugin_metadata['pyproject_toml'])
 
     # Tags
     all_tags = ', '.join(tag for tag in
-        [PLUGIN_TYPES.get(plugin_metadata['plugin_type'], None)] +
+        [utils.PLUGIN_TYPES.get(plugin_metadata['plugin_type'], None)] +
         plugin_metadata['keywords'] if tag != None)
 
     # Template partial for authors / maintainers; construct separately
@@ -101,9 +82,11 @@ def render_rst_file(plugin_name, plugin_metadata, out_dir):
     if authors or maintainers:
         authors_str = maintainers_str = None
         if maintainers:
-            maintainers_str = "**Maintainers:** " + format_contact(maintainers)
+            maintainers_str = "**Maintainers:** " + "; ".join(utils.format_contact(
+                maintainers, include_name_and_email=True))
         if authors:
-            authors_str = "**Authors:** " + format_contact(authors)
+            authors_str = "**Authors:** " + "; ".join(utils.format_contact(
+                authors, include_name_and_email=True))
 
         if authors and maintainers:
             authors_maintainers = "".join(authors_str + "\n" +
