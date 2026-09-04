@@ -199,8 +199,7 @@ def main(args=None):
             'license': pyproject_toml['project']['license'],
             'plugin_type': plugin['plugin_type'],
             'keywords': plugin['keywords'],
-            'date_last_updated': tag_date,
-            'download_count': None
+            'date_last_updated': tag_date
         })
 
     generated_date = datetime.datetime.today().isoformat()
