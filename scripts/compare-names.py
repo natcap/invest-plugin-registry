@@ -57,12 +57,14 @@ def main(args=None):
                 best_match = matches[0]
                 score = difflib.SequenceMatcher(None, new_name, best_match).ratio()
                 if score == 1.0:
-                    target_file.write(f"❌ plugin has the same {label} as an existing plugin\n")
-                    parser.exit(1, f"Failing because plugin {label} is not unique")
+                    target_file.write(
+                        f"❌ plugin has the same {label} ({user_provided_string}) "
+                        "as an existing plugin\n")
+                    failed = True
                 else:
                     target_file.write(
-                        f"ℹ️  plugin {label} was found to be similar to existing plugin name(s): "
-                        f"{matches}\n")
+                        f"ℹ️  plugin {label} ({user_provided_string}) was found "
+                        f"to be similar to existing plugin name(s): {matches}\n")
             else:
                 target_file.write(f"✅ plugin {label} is unique!\n")
     if failed:
