@@ -47,11 +47,11 @@ def main(args=None):
     pkg_name = pyproject_data['project']['name']
     existing_packages = _get_project_names_from_registry()
 
-    for user_provided_string, label, existing_strings in [
-            (new_name, 'human-readable name', existing_names),
-            (pkg_name, 'package name', existing_packages)]:
-        matches = difflib.get_close_matches(user_provided_string, existing_strings, cutoff=0.85)
-        with open(parsed_args.TARGET_FILE, 'w') as target_file:
+    with open(parsed_args.TARGET_FILE, 'w') as target_file:
+        for user_provided_string, label, existing_strings in [
+                (new_name, 'human-readable name', existing_names),
+                (pkg_name, 'package name', existing_packages)]:
+            matches = difflib.get_close_matches(user_provided_string, existing_strings, cutoff=0.85)
             if matches:
                 best_match = matches[0]
                 score = difflib.SequenceMatcher(None, new_name, best_match).ratio()
