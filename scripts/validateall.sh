@@ -81,6 +81,7 @@ NAME_COMPARE="name_comparison.txt"
 python scripts/compare-names.py \
     "$NEW_PLUGIN_DATA_FILE" \
     main_plugins.json \
+    "$LOCAL_REPO_DIR/pyproject.toml" \
     "$NAME_COMPARE"
 
 # compare versions
