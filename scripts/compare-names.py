@@ -55,7 +55,7 @@ def main(args=None):
             matches = difflib.get_close_matches(user_provided_string, existing_strings, cutoff=0.85)
             if matches:
                 best_match = matches[0]
-                score = difflib.SequenceMatcher(None, new_name, best_match).ratio()
+                score = difflib.SequenceMatcher(None, user_provided_string, best_match).ratio()
                 if score == 1.0:
                     target_file.write(
                         f"❌ plugin has the same {label} ({user_provided_string}) "
