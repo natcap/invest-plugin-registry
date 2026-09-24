@@ -42,7 +42,7 @@ def main(args=None):
     new_name = new_plugin_data['plugin_name'].lower()
     existing_names = [plugin['plugin_name'].lower() for plugin in main_plugins_data]
 
-    with open(parsed_args.NEW_PYPROJECT_TOML) as tomlfile:
+    with open(parsed_args.NEW_PYPROJECT_TOML, 'rb') as tomlfile:
         pyproject_data = tomllib.load(tomlfile)
     pkg_name = pyproject_data['project']['name']
     existing_packages = _get_project_names_from_registry()
