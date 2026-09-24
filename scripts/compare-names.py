@@ -47,6 +47,7 @@ def main(args=None):
     pkg_name = pyproject_data['project']['name']
     existing_packages = _get_project_names_from_registry()
 
+    failed = False
     with open(parsed_args.TARGET_FILE, 'w') as target_file:
         for user_provided_string, label, existing_strings in [
                 (new_name, 'human-readable name', existing_names),
@@ -64,6 +65,8 @@ def main(args=None):
                         f"{matches}\n")
             else:
                 target_file.write(f"✅ plugin {label} is unique!\n")
+    if failed:
+        parser.exit(1, "Failing because plugin name(s) not unique\n")
 
 
 if __name__ == "__main__":
