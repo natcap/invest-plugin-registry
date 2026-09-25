@@ -170,6 +170,9 @@ def main(args=None):
                     f"non-OK status code {resp.status_code}")
 
         commit_sha, tag_date = _version_info(host, org, repo, plugin_version)
+        # Verify we aren't breaking the contract.
+        assert project_name not in all_toml_data, (
+            f"Project name {project_name} is already in the TOML data")
         all_toml_data[project_name] = {
             'pyproject_toml': pyproject_toml,
             'github_repo': plugin_git_url,
