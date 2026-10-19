@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+# Be eXplicit about which programs are running
+# Helps with debugging.
+set -x
+
 EXIT_CODE=0
 
 for FILE in scripts/*.py
