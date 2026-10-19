@@ -186,8 +186,8 @@ def main(args=None):
         }
 
         workbench_metadata.append({
-            'pyproject_toml_project_name': pyproject_toml['project']['name'],
-            'invest_package_name': pyproject_toml['tool']['natcap']['invest']['package_name'],
+            'dist_package_name': pyproject_toml['project']['name'],
+            'import_package_name': pyproject_toml['tool']['natcap']['invest']['package_name'],
             'plugin_name': plugin['plugin_name'],
             'version': plugin_version,
             'description': pyproject_toml['project']['description'],
