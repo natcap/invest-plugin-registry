@@ -82,6 +82,9 @@ html_theme_options = {
 html_css_files = [
     'css/custom.css'
 ]
+html_js_files = [
+    'js/download_stats.js'
+]
 
 # -- Google Analytics Config-------------------------------------------------
 googleanalytics_id = 'G-V4LRNKYK0B'
