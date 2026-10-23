@@ -124,6 +124,7 @@ def render_rst_file(plugin_name, plugin_metadata, out_dir):
         .. tags:: {all_tags}
 
         |
+        | **Downloads:**
         | **Source Code:** {plugin_metadata['github_repo']}
         | **Current Version:** {plugin_metadata['version']}
         | **Last Updated:** {plugin_metadata['date_last_updated']}
