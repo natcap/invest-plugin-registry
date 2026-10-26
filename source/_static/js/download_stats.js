@@ -20,8 +20,8 @@ async function fetchDownloadStats(pluginID) {
 }
 
 async function getDownloadCount() {
-  // dist_package_name is used as the slug for the plugin's URL
-  // and is also used as the key in plugin_download_stats.json
+  // pyproject.toml.project.name === dist_package_name; it's the primary key
+  // used by the Registry and is also used as the key in plugin_download_stats.json
   let pluginID = document.getElementsByClassName("dist-package-name")[0].innerText.trim();
   const downloadCount = await fetchDownloadStats(pluginID);
 
