@@ -121,6 +121,10 @@ def render_rst_file(plugin_name, plugin_metadata, out_dir):
         {plugin_metadata['plugin_name']}
         {'='*len(plugin_metadata['plugin_name'])}
 
+        .. div:: dist-package-name
+
+          {plugin_metadata['pyproject_toml']['project']['name']}
+
         .. tags:: {all_tags}
 
         |
